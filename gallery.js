@@ -107,7 +107,7 @@ const services = [
   {
     title: "Espadrilles",
     titleAr: "أحذية رياضية",
-    image: "images/shoes.png",
+    image: "images/Shoes.png",
     category: "Shoes",
   },
 

@@ -1,13 +1,8 @@
 BEGIN:VCARD
-
 VERSION:3.0
-
 FN:Laverie Ache & Ferch
-
-TEL:+213772151839
-
+ORG:Laverie Ache & Ferch
+TEL;TYPE=CELL:+213772151839
 EMAIL:laverieacheferch@gmail.com
-
 ADR:;;Tlemcen;;;Algérie
-
-END:VCARD 
+END:VCARD
