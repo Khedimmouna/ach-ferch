@@ -1,0 +1,2921 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Laverie Ach & Ferch — Laverie professionnelle & écologique
+    </title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================
+       TOKENS — Laverie Ache & Ferch, direction 2026
+       Palette inspirée de l'eau claire et du linge amidonné
+    ============================================ */
+      :root {
+        --ink: #0b2036;
+        --ink-soft: #142c47;
+        --foam: #faf9f4;
+        --foam-dim: #f1eee4;
+        --linen: #e7e0cc;
+        --aqua: #23c4a8;
+        --aqua-deep: #0e8f79;
+        --aqua-pale: #cfefe7;
+        --coral: #f0654b;
+        --text: #10233a;
+        --text-muted: #5c6e82;
+        --text-on-ink: #f4f6f5;
+        --text-on-ink-muted: #9fb2c4;
+
+        --font-display: "Fraunces", Georgia, serif;
+        --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+        --radius-sm: 10px;
+        --radius-md: 20px;
+        --radius-lg: 32px;
+
+        --shadow-soft: 0 10px 34px rgba(11, 32, 54, 0.08);
+        --shadow-elevated: 0 26px 70px rgba(11, 32, 54, 0.18);
+
+        --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--text);
+        background: var(--foam);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :focus-visible {
+        outline: 2.5px solid var(--aqua);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 5vw, 40px);
+      }
+
+      #services,
+      #contact {
+        scroll-margin-top: 84px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 1.5px;
+        background: currentColor;
+        opacity: 0.6;
+      }
+
+       /* ============================================
+       ARABIC / RTL SUPPORT
+    ============================================ */
+      html[dir="rtl"] body {
+        font-family: var(--font-arabic);
+      }
+ 
+      html[dir="rtl"] .hero-title,
+      html[dir="rtl"] .promise-title,
+      html[dir="rtl"] .section-title,
+      html[dir="rtl"] .gallery-header h2,
+      html[dir="rtl"] .follow-card h2,
+      html[dir="rtl"] .brand-name,
+      html[dir="rtl"] .map-header h3,
+      html[dir="rtl"] .gallery-modal-header h3 {
+        font-family: var(--font-arabic);
+        letter-spacing: 0;
+      }
+ 
+      html[dir="rtl"] .eyebrow {
+        letter-spacing: 0.02em;
+      }
+ 
+      html[dir="rtl"] .eyebrow::before {
+        order: 2;
+      }
+ 
+      html[dir="rtl"] .drum {
+        right: auto;
+        left: -6%;
+      }
+ 
+      html[dir="rtl"] .lightbox-prev {
+        left: auto;
+        right: 20px;
+      }
+      html[dir="rtl"] .lightbox-next {
+        right: auto;
+        left: 20px;
+      }
+      html[dir="rtl"] .lightbox-close {
+        right: auto;
+        left: 24px;
+      }
+ 
+      @media (max-width: 600px) {
+        html[dir="rtl"] .lightbox-prev {
+          right: 8px;
+        }
+        html[dir="rtl"] .lightbox-next {
+          left: 8px;
+        }
+      }
+ 
+      .lang-toggle {
+        flex-shrink: 0;
+        padding: 0.55rem 1.1rem !important;
+        font-size: 0.85rem !important;
+        font-weight: 700;
+        border-radius: 999px;
+        border: 1.5px solid rgba(11, 32, 54, 0.15);
+        background: #fff;
+        color: var(--ink);
+        cursor: pointer;
+        transition:
+          border-color 0.25s var(--ease),
+          background 0.25s var(--ease);
+      }
+      .lang-toggle:hover {
+        border-color: var(--aqua-deep);
+        background: var(--aqua-pale);
+      }
+
+      /* ============================================
+       NAV — barre fixe avec logo
+    ============================================ */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        background: rgba(250, 249, 244, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(11, 32, 54, 0.07);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding: 0.9rem clamp(20px, 5vw, 40px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+
+      .brand-name {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+
+      .brand-name small {
+        display: block;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+      }
+
+        html[dir="rtl"] .brand-name small {
+        font-family: var(--font-arabic);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.94rem;
+        transition: color 0.3s var(--ease);
+      }
+
+      .nav-links a:hover {
+        color: var(--aqua-deep);
+      }
+
+      .nav .btn-sm {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.88rem;
+        box-shadow: none;
+      }
+
+       .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 700px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      /* ============================================
+       HERO — le tambour : anneaux concentriques
+       animés, écho visuel du cycle de lavage
+    ============================================ */
+      .hero-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background:
+          radial-gradient(
+            circle at 78% 28%,
+            rgba(35, 196, 168, 0.16),
+            transparent 55%
+          ),
+          linear-gradient(
+            180deg,
+            var(--ink) 0%,
+            #0d2740 55%,
+            var(--ink-soft) 100%
+          );
+        color: var(--text-on-ink);
+        overflow: hidden;
+        padding: 140px 0 100px;
+      }
+
+      .drum {
+        position: absolute;
+        top: 50%;
+        right: -6%;
+        transform: translateY(-50%);
+        width: min(58vw, 720px);
+        height: min(58vw, 720px);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      .drum svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Le petit "jeu" : le cercle blanc au centre du tambour se saisit et se
+       fait tourner à la main, niché dans les anneaux verts */
+      .drum-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+        border-radius: 50%;
+        background: var(--foam);
+        box-shadow:
+          var(--shadow-elevated),
+          inset 0 0 0 1px rgba(11, 32, 54, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        pointer-events: auto;
+        z-index: 2;
+        will-change: transform;
+      }
+      .drum-spinner:active {
+        cursor: grabbing;
+      }
+      .drum-spinner.grabbing {
+        cursor: grabbing;
+      }
+      .drum-spinner:hover {
+        box-shadow:
+          var(--shadow-elevated),
+          0 0 0 6px rgba(35, 196, 168, 0.14);
+      }
+      .drum-spinner:focus-visible {
+        outline: 2.5px solid var(--aqua);
+        outline-offset: 6px;
+      }
+
+      .drum-spinner-logo {
+        width: 58%;
+        height: 58%;
+        object-fit: contain;
+        pointer-events: none;
+        display: block;
+      }
+
+      .drum-hint {
+        position: absolute;
+        bottom: -2.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--text-on-ink-muted);
+        white-space: nowrap;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .drum-ring {
+        transform-origin: center;
+        animation: spin 46s linear infinite;
+      }
+      .drum-ring.reverse {
+        animation-direction: reverse;
+        animation-duration: 60s;
+      }
+      .drum-ring.slow {
+        animation-duration: 90s;
+      }
+
+      .drop {
+        animation: drift 7s var(--ease) infinite;
+      }
+      .drop:nth-child(2) {
+        animation-delay: 1.4s;
+      }
+      .drop:nth-child(3) {
+        animation-delay: 2.8s;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.55;
+        }
+        50% {
+          transform: translateY(-14px);
+          opacity: 1;
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 680px;
+        padding: 0 clamp(20px, 5vw, 40px);
+      }
+
+      .hero-content .eyebrow {
+        color: var(--aqua);
+        margin-bottom: 1.6rem;
+      }
+
+      .hero-logo-badge {
+        display: inline-flex;
+        padding: clamp(10px, 1.4vw, 16px);
+        background: var(--foam);
+        border-radius: 24px;
+        box-shadow: var(--shadow-elevated);
+        margin-bottom: 2.2rem;
+      }
+
+      .hero-logo {
+        width: clamp(110px, 13vw, 170px);
+        height: clamp(110px, 13vw, 170px);
+        object-fit: contain;
+        display: block;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-size: clamp(2.6rem, 6vw, 4.6rem);
+        line-height: 1.04;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.6rem;
+      }
+
+      .hero-title em {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--aqua);
+      }
+
+      html[dir="rtl"] .hero-title em {
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+        color: var(--text-on-ink-muted);
+        max-width: 46ch;
+        margin-bottom: 2.8rem;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.95rem 2.1rem;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 999px;
+        text-decoration: none;
+        transition:
+          transform 0.3s var(--ease),
+          box-shadow 0.3s var(--ease),
+          background 0.3s var(--ease),
+          color 0.3s var(--ease);
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        display: inline-block;
+      }
+
+      html[dir="rtl"] .btn {
+        font-family: var(--font-arabic);
+      }
+
+      .btn-primary {
+        background: var(--aqua);
+        color: var(--ink);
+        box-shadow: 0 12px 30px rgba(35, 196, 168, 0.28);
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 36px rgba(35, 196, 168, 0.4);
+        background: #33d4b7;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-on-ink);
+        border-color: rgba(244, 246, 245, 0.35);
+      }
+      .btn-secondary:hover {
+        border-color: var(--text-on-ink);
+        background: rgba(244, 246, 245, 0.06);
+        transform: translateY(-3px);
+      }
+
+      .hero-gradient-transition {
+  width: 105%;
+  height: 150px;
+  margin-top: -60px;
+  margin-left: -5%;
+  margin-bottom: -60px;
+  background: linear-gradient(
+    180deg,
+    var(--ink) 0%,
+    #0d2740 15%,
+    #16324f 30%,
+    #244a6b 45%,
+    #3d6a8c 58%,
+    #6b95b8 70%,
+    #a3c4de 80%,
+    #d3e6f5 90%,
+    #f8fbff 100%
+  );
+  filter: blur(24px);
+  position: relative;
+  z-index: 1;
+}
+
+      /* Wave divider — signature transition entre hero et contenu
+      .wave-divider {
+        display: block;
+        width: 100%;
+        line-height: 0;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      } */
+
+      /* ============================================
+       En-têtes de section génériques (contact, etc.)
+    ============================================ */
+      .section-head {
+        max-width: 620px;
+        margin-bottom: 4rem;
+      }
+      .section-head .eyebrow {
+        color: var(--aqua-deep);
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 52ch;
+      }
+
+      /* ============================================
+       PROMESSE — une seule idée, développée
+    ============================================ */
+      .promise-section {
+        padding: 150px 0 130px;
+        background: var(--foam);
+        text-align: center;
+      }
+
+      .promise-content {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      .promise-content .eyebrow {
+        color: var(--aqua-deep);
+        justify-content: center;
+        margin-bottom: 1.4rem;
+      }
+
+      .promise-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+        line-height: 1.16;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        margin-bottom: 2.8rem;
+      }
+
+      .promise-title em {
+        font-style: italic;
+        font-weight: 500;
+        color: var(--aqua-deep);
+      }
+
+      html[dir="rtl"] .promise-title em {
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .promise-proofs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .proof {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(11, 32, 54, 0.08);
+        box-shadow: var(--shadow-soft);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--ink);
+      }
+
+      .proof::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--aqua);
+        flex-shrink: 0;
+      }
+
+      /* ============================================
+       CONTACT — grid propre, sans absolute/fixed-width
+    ============================================ */
+      .contact-section {
+        padding: 120px 0 130px;
+        background: var(--foam-dim);
+      }
+
+      .contact-layout {
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 1.75rem;
+        margin-top: 3.5rem;
+        align-items: start;
+      }
+
+      .contact-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(11, 32, 54, 0.06);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .info-card {
+        padding: 2.4rem;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+      .info-item + .info-item {
+        margin-top: 1.9rem;
+      }
+
+      .info-icon {
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        background: var(--aqua-pale);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .info-content h3 {
+        font-size: 1.02rem;
+        color: var(--ink);
+        margin-bottom: 0.35rem;
+        font-weight: 700;
+      }
+
+      .info-content p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+      }
+
+      .opening-hours {
+        color: var(--aqua-deep);
+        font-weight: 700;
+      }
+
+      .map-card {
+        overflow: hidden;
+      }
+
+      .map-header {
+        padding: 1.5rem 1.75rem;
+        border-bottom: 1px solid rgba(11, 32, 54, 0.06);
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .map-header h3 {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .map-link {
+        color: var(--aqua-deep);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .map-link:hover {
+        text-decoration: underline;
+      }
+
+      .map-container {
+        width: 100%;
+        height: 260px;
+        background: var(--foam-dim);
+      }
+      .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        filter: saturate(0.9);
+      }
+
+      .quick-contact {
+        padding: 2.2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .quick-contact-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+      }
+
+      .quick-contact-item .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--aqua-pale);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+      }
+
+      .quick-contact-item h4 {
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .quick-contact-item p {
+        color: var(--ink);
+        font-size: 1.02rem;
+        font-weight: 700;
+        word-break: break-word;
+      }
+
+      .follow-card {
+        background: linear-gradient(
+          150deg,
+          var(--ink) 0%,
+          var(--ink-soft) 100%
+        );
+        border-radius: var(--radius-md);
+        padding: 2.6rem 2.2rem;
+        color: var(--text-on-ink);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 280px;
+      }
+
+      .follow-card::before {
+        content: "";
+        position: absolute;
+        inset: -40% -20% auto auto;
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(
+          circle,
+          rgba(35, 196, 168, 0.35),
+          transparent 65%
+        );
+        border-radius: 50%;
+      }
+
+      .follow-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .follow-card h2 {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+      }
+      .follow-card p {
+        color: var(--text-on-ink-muted);
+        font-size: 1rem;
+        margin-bottom: 1.9rem;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 1.6rem;
+      }
+
+      .social-icon {
+        width: 52px;
+        height: 52px;
+        background: rgba(244, 246, 245, 0.1);
+        border: 1px solid rgba(244, 246, 245, 0.16);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-on-ink);
+        transition:
+          transform 0.3s var(--ease),
+          background 0.3s var(--ease),
+          color 0.3s var(--ease);
+      }
+      .social-icon svg {
+        width: 22px;
+        height: 22px;
+        fill: currentColor;
+        display: block;
+      }
+      .social-icon:hover {
+        transform: translateY(-4px);
+        background: var(--aqua);
+        color: var(--ink);
+      }
+
+      .social-handle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text-on-ink-muted);
+      }
+
+      /* ============================================
+       FOOTER
+    ============================================ */
+      footer {
+        background: var(--ink);
+        color: var(--text-on-ink-muted);
+        padding: 2.6rem clamp(20px, 5vw, 40px);
+        text-align: center;
+        font-size: 0.92rem;
+      }
+
+      /* ============================================
+       REVEAL ON SCROLL
+    ============================================ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .drum-ring,
+        .drop {
+          animation: none;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .btn,
+        .service-card,
+        .social-icon {
+          transition: none;
+        }
+      }
+
+      /* ============================================
+       RESPONSIVE
+    ============================================ */
+      @media (max-width: 860px) {
+        .drum {
+          opacity: 0.6;
+          width: 80vw;
+          height: 80vw;
+          right: -20%;
+        }
+         html[dir="rtl"] .drum {
+          right: auto;
+          left: -20%;
+        }
+        .drum-hint {
+          display: none;
+        }
+        .contact-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero-section {
+          padding: 120px 0 90px;
+          text-align: left;
+        }
+        html[dir="rtl"] .hero-section {
+          text-align: right;
+        }
+        .hero-buttons {
+          flex-direction: column;
+        }
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+        .quick-contact {
+          grid-template-columns: 1fr;
+        }
+        .quick-contact-item {
+          align-items: center;
+          text-align: center;
+        }
+      }
+
+      /* ==========================================================
+   PREMIUM GALLERY SECTION
+   Part 1 - Variables, Layout & Background
+========================================================== */
+
+/* ==========================
+   CSS VARIABLES
+========================== */
+
+:root {
+
+    --gallery-max-width: 1400px;
+
+    --gallery-radius: 22px;
+
+    --gallery-card-width: 280px;
+    --gallery-card-height: 360px;
+
+    --gallery-blue: #0f7cff;
+    --gallery-blue-light: #4da6ff;
+    --gallery-dark: #0d1b2a;
+    --gallery-text: #25364a;
+    --gallery-muted: #718096;
+
+    --gallery-border:
+        rgba(255,255,255,.55);
+
+    --gallery-bg:
+        rgba(255,255,255,.68);
+
+    --gallery-shadow:
+        0 18px 45px rgba(13,27,42,.08);
+
+    --gallery-shadow-hover:
+        0 28px 70px rgba(13,27,42,.18);
+
+    --gallery-transition:
+        cubic-bezier(.22,.61,.36,1);
+
+}
+
+/* ==========================
+   SECTION
+========================== */
+
+.gallery-section{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:120px 0;
+
+    isolation:isolate;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fbff 0%,
+            #ffffff 100%
+        );
+
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.gallery-section .container{
+
+    width:min(
+        var(--gallery-max-width),
+        calc(100% - 60px)
+    );
+
+    margin-inline:auto;
+
+    position:relative;
+
+    z-index:3;
+
+}
+
+/* ==========================
+   DECORATIVE BACKGROUND
+========================== */
+
+.gallery-bg{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+    mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 100%);
+}
+
+/* ==========================
+   BLUR CIRCLES
+========================== */
+
+.blur-circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.45;
+
+    animation:
+        floatBlob
+        16s
+        ease-in-out
+        infinite;
+
+}
+
+.blur-1{
+
+    width:340px;
+    height:340px;
+
+    background:#77c4ff;
+
+    top:-40px;
+    left:-100px;
+
+}
+
+.blur-2{
+
+    width:420px;
+    height:420px;
+
+    background:#b8e1ff;
+
+    right:-160px;
+    top:120px;
+
+    animation-delay:3s;
+
+}
+
+.blur-3{
+
+    width:300px;
+    height:300px;
+
+    background:#dbefff;
+
+    left:50%;
+
+    bottom:-120px;
+
+    transform:translateX(-50%);
+
+    animation-delay:5s;
+
+}
+
+/* ==========================
+   FLOATING SHAPES
+========================== */
+
+.floating-shape{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.55),
+            rgba(255,255,255,.15)
+        );
+
+    border:
+
+        1px solid
+        rgba(255,255,255,.4);
+
+    backdrop-filter:
+
+        blur(14px);
+
+    animation:
+
+        floatShape
+        12s
+        ease-in-out
+        infinite;
+
+}
+
+.shape-1{
+
+    width:60px;
+    height:60px;
+
+    top:18%;
+    left:12%;
+
+}
+
+.shape-2{
+
+    width:95px;
+    height:95px;
+
+    right:10%;
+    top:60%;
+
+    animation-delay:2s;
+
+}
+
+.shape-3{
+
+    width:42px;
+    height:42px;
+
+    left:75%;
+    top:24%;
+
+    animation-delay:5s;
+
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.gallery-header{
+
+    text-align:center;
+
+    max-width:760px;
+
+    margin-inline:auto;
+
+    margin-bottom:70px;
+
+}
+
+.gallery-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:.55rem 1.2rem;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(15,124,255,.08);
+
+    color:
+
+        var(--gallery-blue);
+
+    font-size:.82rem;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    font-weight:700;
+
+    margin-bottom:22px;
+
+}
+
+.gallery-header h2{
+
+    font-size:
+
+        clamp(
+            2.4rem,
+            5vw,
+            4.2rem
+        );
+
+    line-height:1.05;
+
+    color:
+
+        var(--gallery-dark);
+
+    margin-bottom:18px;
+
+    font-weight:800;
+
+    letter-spacing:-.04em;
+
+}
+
+.gallery-header p{
+
+    font-size:1.08rem;
+
+    line-height:1.8;
+
+    color:
+
+        var(--gallery-muted);
+
+}
+
+/* ==========================
+   REVEAL ANIMATION
+========================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+
+        translateY(60px);
+
+    transition:
+
+        opacity .9s var(--gallery-transition),
+        transform .9s var(--gallery-transition);
+
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+/* ==========================
+   KEYFRAMES
+========================== */
+
+@keyframes floatBlob{
+
+    0%,100%{
+
+        transform:
+
+            translateY(0)
+            translateX(0);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-35px)
+            translateX(20px);
+
+    }
+
+}
+
+@keyframes floatShape{
+
+    0%,100%{
+
+        transform:
+
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-18px)
+            rotate(10deg);
+
+    }
+
+}
+/* ==========================================================
+   PART 2 - MARQUEE & PREMIUM CARDS
+========================================================== */
+
+/* ==========================
+   MARQUEE
+========================== */
+
+.marquee{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    margin:0 auto 80px;
+
+    z-index:2;
+
+}
+
+/* Fade sur les côtés */
+
+.marquee-mask{
+
+    position:relative;
+
+    overflow:hidden;
+
+    mask-image:linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+
+    -webkit-mask-image:linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+
+}
+
+/* Piste */
+
+.marquee-track{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:32px;
+
+    width:max-content;
+
+    animation:marqueeScroll 35s linear infinite;
+
+    will-change:transform;
+
+}
+
+.marquee,
+.marquee-mask,
+.marquee-track {
+  direction: ltr;
+}
+
+html[dir="rtl"] .marquee-track {
+  animation-direction: reverse;
+}
+
+/* Pause au survol */
+
+.marquee:hover .marquee-track{
+
+    animation-play-state:paused;
+
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.service-card{
+
+    width:280px;
+
+    height:360px;
+
+    flex:none;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.72);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:0 18px 45px rgba(0,0,0,.08);
+
+    transition:
+        transform .45s cubic-bezier(.22,.61,.36,1),
+        box-shadow .45s cubic-bezier(.22,.61,.36,1),
+        border-color .45s;
+
+    cursor:pointer;
+
+}
+
+/* Hover */
+
+.service-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 28px 70px rgba(0,0,0,.18);
+
+    border-color:rgba(15,124,255,.35);
+
+}
+
+/* ==========================
+   IMAGE
+========================== */
+
+.card-image{
+
+    width:100%;
+
+    height:240px;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.card-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:
+        transform .55s cubic-bezier(.22,.61,.36,1);
+
+}
+
+/* Zoom image */
+
+.service-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+   TITLE
+========================== */
+
+.service-card h3{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 18px;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+    color:#17304d;
+
+    text-align:center;
+
+    letter-spacing:-.02em;
+
+}
+
+/* Petit reflet premium */
+
+.service-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.35),
+            transparent 55%
+        );
+
+    pointer-events:none;
+
+    opacity:.8;
+
+}
+
+/* Glow au hover */
+
+.service-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-2px;
+
+    border-radius:inherit;
+
+    background:linear-gradient(
+        135deg,
+        rgba(15,124,255,.18),
+        transparent 70%
+    );
+
+    opacity:0;
+
+    transition:opacity .45s;
+
+    pointer-events:none;
+
+}
+
+.service-card:hover::after{
+
+    opacity:1;
+
+}
+
+/* ==========================
+   MARQUEE ANIMATION
+========================== */
+
+@keyframes marqueeScroll{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(-50%);
+
+    }
+
+}
+
+/* ==========================
+   PERFORMANCE
+========================== */
+
+.service-card,
+.card-image img,
+.marquee-track{
+
+    will-change:transform;
+
+}
+
+/* ==========================
+   MOBILE SPEED
+========================== */
+
+@media (max-width:768px){
+
+    .marquee-track{
+
+        animation-duration:48s;
+
+    }
+
+}
+
+/* ==========================================================
+   PART 3 - CTA BUTTON, RESPONSIVE & PREMIUM ANIMATIONS
+========================================================== */
+
+/* ==========================
+   CTA
+========================== */
+
+.gallery-footer{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:20px;
+
+}
+
+.gallery-button{
+
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 34px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        135deg,
+        #0f7cff,
+        #39a0ff,
+        #0f7cff
+    );
+
+    background-size:250%;
+
+    color:#fff;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:.02em;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:
+        transform .45s cubic-bezier(.22,.61,.36,1),
+        box-shadow .45s,
+        background-position .8s;
+
+    box-shadow:
+        0 18px 45px rgba(15,124,255,.35);
+
+}
+
+.gallery-button:hover{
+
+    transform:translateY(-5px);
+
+    background-position:right center;
+
+    box-shadow:
+        0 28px 60px rgba(15,124,255,.45);
+
+}
+
+.gallery-button span{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.gallery-button svg{
+
+    width:22px;
+
+    height:22px;
+
+    transition:
+        transform .35s cubic-bezier(.22,.61,.36,1);
+
+}
+
+.gallery-button:hover svg{
+
+    transform:translateX(6px);
+
+}
+html[dir="rtl"] .gallery-button svg{
+ 
+    transform:scaleX(-1);
+ 
+}
+html[dir="rtl"] .gallery-button:hover svg{
+ 
+    transform:scaleX(-1) translateX(6px);
+ 
+}
+/* Reflection */
+
+.gallery-button::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:80%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform:skewX(-25deg);
+
+}
+
+.gallery-button:hover::before{
+
+    animation:shine 1s;
+
+}
+
+@keyframes shine{
+
+    to{
+
+        left:150%;
+
+    }
+
+}
+
+/* ==========================
+   REVEAL
+========================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+    transition:
+
+        opacity .9s cubic-bezier(.22,.61,.36,1),
+
+        transform .9s cubic-bezier(.22,.61,.36,1);
+
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+.marquee::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:1200px){
+
+    .gallery-header{
+
+        margin-bottom:55px;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    .service-card{
+
+        width:250px;
+
+        height:340px;
+
+    }
+
+    .card-image{
+
+        height:220px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .gallery-section{
+
+        padding:90px 0;
+
+    }
+
+    .gallery-header h2{
+
+        font-size:2.5rem;
+
+    }
+
+    .gallery-header p{
+
+        font-size:1rem;
+
+    }
+
+    .marquee-track{
+
+        gap:20px;
+
+        animation-duration:48s;
+
+    }
+
+    .service-card{
+
+        width:240px;
+
+        height:330px;
+
+    }
+
+    .gallery-button{
+
+        padding:16px 28px;
+
+        font-size:.95rem;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .gallery-section{
+
+        padding:70px 0;
+
+    }
+
+    .gallery-header{
+
+        margin-bottom:40px;
+
+    }
+
+    .gallery-header h2{
+
+        font-size:2rem;
+
+    }
+
+    .gallery-tag{
+
+        font-size:.72rem;
+
+    }
+
+    .service-card{
+
+        width:220px;
+
+        height:310px;
+
+    }
+
+    .card-image{
+
+        height:200px;
+
+    }
+
+    .service-card h3{
+
+        font-size:1rem;
+
+    }
+
+}
+
+/* ==========================
+   REDUCED MOTION
+========================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+/* ============================================
+   GALLERY MODAL
+============================================ */
+.gallery-modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(11,32,54,.55);
+  backdrop-filter:blur(6px);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .35s var(--ease), visibility .35s;
+}
+.gallery-modal.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.gallery-modal-inner{
+  width:min(1100px, 100%);
+  max-height:86vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:var(--radius-lg, 24px);
+  padding:2rem;
+  box-shadow:var(--shadow-elevated, 0 26px 70px rgba(11,32,54,.3));
+}
+
+.gallery-modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:1.5rem;
+}
+.gallery-modal-header h3{
+  font-family:var(--font-display, serif);
+  font-size:1.4rem;
+  color:var(--ink, #0b2036);
+}
+
+.gallery-modal-close{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
+  background:var(--foam-dim, #f1eee4);
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+  color:var(--ink, #0b2036);
+  transition:background .25s;
+}
+.gallery-modal-close:hover{
+  background:var(--aqua-pale, #cfefe7);
+}
+
+.gallery-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-bottom:1.75rem;
+}
+
+.filter-btn{
+  padding:.55rem 1.2rem;
+  border-radius:999px;
+  border:1.5px solid rgba(11,32,54,.12);
+  background:#fff;
+  font-weight:600;
+  font-size:.88rem;
+  cursor:pointer;
+  color:var(--text-muted, #5c6e82);
+  transition:all .25s;
+}
+html[dir="rtl"] .filter-btn{
+  font-family: var(--font-arabic);
+}
+.filter-btn:hover{
+  border-color:var(--aqua-deep, #0e8f79);
+}
+.filter-btn.active{
+  background:var(--ink, #0b2036);
+  border-color:var(--ink, #0b2036);
+  color:#fff;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+  gap:14px;
+}
+
+.gallery-item{
+  border-radius:14px;
+  overflow:hidden;
+  aspect-ratio:1/1;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(11,32,54,.1);
+}
+.gallery-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s var(--ease);
+}
+.gallery-item:hover .gallery-image{
+  transform:scale(1.06);
+}
+
+/* ============================================
+   LIGHTBOX
+============================================ */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.9);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s, visibility .3s;
+}
+.lightbox.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.lightbox-image{
+  max-width:88vw;
+  max-height:82vh;
+  border-radius:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next{
+  position:absolute;
+  border:none;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  cursor:pointer;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .25s;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover{
+  background:rgba(255,255,255,.25);
+}
+
+.lightbox-close{
+  top:24px;
+  right:24px;
+  width:44px;
+  height:44px;
+  font-size:1.5rem;
+}
+
+.lightbox-prev,
+.lightbox-next{
+  top:50%;
+  transform:translateY(-50%);
+  width:56px;
+  height:56px;
+  font-size:2rem;
+}
+.lightbox-prev{ left:20px; }
+.lightbox-next{ right:20px; }
+
+.lightbox-counter{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:.9rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  opacity:.8;
+}
+
+@media (max-width:600px){
+  .lightbox-prev,.lightbox-next{ width:44px; height:44px; font-size:1.5rem; }
+  .lightbox-prev{ left:8px; }
+  .lightbox-next{ right:8px; }
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a href="#" class="brand">
+          <span class="brand-name"
+            >Ach & Ferch<small data-i18n="brandTagline">Laverie professionnelle</small></span
+          >
+        </a>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#services" data-i18n="navPromise">Notre promesse</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
+        </nav>
+<div class="nav-actions">
+          <button id="langToggle" class="lang-toggle" type="button" aria-label="Changer de langue">عربي</button>
+          <a href="#contact" class="btn btn-primary btn-sm" data-i18n="navContactBtn">Nous contacter</a>
+        </div>      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="drum" aria-hidden="false">
+        <svg viewBox="0 0 400 400" fill="none">
+          <circle
+            class="drum-ring slow"
+            cx="200"
+            cy="200"
+            r="180"
+            stroke="rgba(244,246,245,0.08)"
+            stroke-width="1.5"
+          />
+          <circle
+            class="drum-ring"
+            cx="200"
+            cy="200"
+            r="150"
+            stroke="rgba(35,196,168,0.35)"
+            stroke-width="1.5"
+            stroke-dasharray="4 10"
+          />
+          <circle
+            class="drum-ring reverse"
+            cx="200"
+            cy="200"
+            r="118"
+            stroke="rgba(244,246,245,0.14)"
+            stroke-width="1.5"
+          />
+          <circle
+            class="drum-ring slow"
+            cx="200"
+            cy="200"
+            r="86"
+            stroke="rgba(35,196,168,0.5)"
+            stroke-width="1.5"
+            stroke-dasharray="2 8"
+          />
+          <circle class="drop" cx="200" cy="90" r="4" fill="#23C4A8" />
+          <circle
+            class="drop"
+            cx="315"
+            cy="230"
+            r="3"
+            fill="#F4F6F5"
+            opacity="0.5"
+          />
+          <circle
+            class="drop"
+            cx="105"
+            cy="270"
+            r="3.5"
+            fill="#23C4A8"
+            opacity="0.7"
+          />
+        </svg>
+        <div
+          class="drum-spinner"
+          id="drumSpinner"
+          role="img"
+          aria-label="Logo Ache &amp; Ferch — faites glisser pour le faire tourner"
+          data-i18n-attr="aria-label:drumAria" tabindex="0"
+        >
+          <img
+            src="logo.png"
+            alt="Logo Ache & Ferch"
+            class="drum-spinner-logo"
+            style="width: 320px; height: auto; border-radius: 50%;"
+
+          />
+          <span class="drum-hint" data-i18n="drumHint">✦ Faites-le tourner ✦</span>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <span class="eyebrow" data-i18n="heroEyebrow">Laverie professionnelle ·</span>
+        <h1 class="hero-title" data-i18n="heroTitle">
+          Un linge impeccable, <em>un cycle plus propre</em>
+        </h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">
+          Ach & Ferch prend soin du linge des particuliers 
+          et des professionnels avec un nettoyage de haute
+          qualité, un service fiable, rapide et une attention portée à chaque détail.
+
+        </p>
+        <div class="hero-buttons">
+          <a href="#galleryTitle" class="btn btn-primary" data-i18n="heroBtn1">Découvrir nos services</a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="navContactBtn">Nous contacter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path
+          d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,80 L0,80 Z"
+          fill="#FAF9F4"
+        />
+      </svg>
+    </div> -->
+
+<div class="hero-gradient-transition" aria-hidden="true"></div>
+  <!-- <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0d2740" />
+        <stop offset="100%" stop-color="#f8fbff" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,80 L0,80 Z"
+      fill="url(#waveGradient)"
+    />
+  </svg>
+</div> -->
+
+    <!-- ============================================================
+     PREMIUM GALLERY SECTION
+============================================================= -->
+<section id="gallery" class="gallery-section" aria-labelledby="galleryTitle">
+
+    <!-- Decorative Background -->
+    <div class="gallery-bg" aria-hidden="true">
+        <span class="blur-circle blur-1"></span>
+        <span class="blur-circle blur-2"></span>
+        <span class="blur-circle blur-3"></span>
+
+        <span class="floating-shape shape-1"></span>
+        <span class="floating-shape shape-2"></span>
+        <span class="floating-shape shape-3"></span>
+    </div>
+
+    <div class="container">
+
+        <!-- Heading -->
+        <header class="gallery-header reveal">
+
+            <span class="gallery-tag" data-i18n="galleryTag">
+                Service de laverie haut de gamme
+            </span>
+
+            <h2 id="galleryTitle" data-i18n="galleryTitle">
+                Nos prestations
+            </h2>
+
+            <p data-i18n="galleryDesc">
+                Découvrez tous les articles que nous lavons, nettoyons et entretenons avec un soin professionnel.
+            </p>
+
+        </header>
+
+    </div>
+
+    <!-- ============================================================
+         Infinite Marquee
+    ============================================================= -->
+
+    <div
+        class="marquee"
+        id="marquee"
+        role="region"
+        aria-label="Laundry Services">
+
+        <div class="marquee-mask">
+
+            <div class="marquee-track" id="marqueeTrack">
+
+                <!-- ===================== -->
+                <!-- ORIGINAL ITEMS -->
+                <!-- ===================== -->
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CTA -->
+
+    <div class="container gallery-footer">
+
+        <button
+            id="openGalleryBtn"
+            class="gallery-button"
+            type="button"
+            aria-haspopup="dialog">
+
+            <span data-i18n="galleryBtn">
+                Explorer toute notre galerie
+            </span>
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M5 12h14M13 5l7 7-7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+
+            </svg>
+
+        </button>
+
+    </div>
+<!-- Gallery Modal -->
+<div class="gallery-modal" id="galleryModal" style="margin-top:70px">
+  <div class="gallery-modal-inner" >
+    <div class="gallery-modal-header">
+      <h3 data-i18n="modalTitle">Notre galerie complète</h3>
+      <button class="gallery-modal-close" id="closeGallery" type="button" aria-label="Fermer" data-i18n-attr="aria-label:closeAria">&times;</button>
+    </div>
+
+    <div class="gallery-filters" role="tablist">
+  <button class="filter-btn active" data-filter="All" type="button" data-i18n="filterAll">Tout</button>
+  <button class="filter-btn" data-filter="Clothes" type="button" data-i18n="filterClothes">Vêtements</button>
+  <button class="filter-btn" data-filter="Home" type="button" data-i18n="filterHome">Linge de maison</button>
+  <button class="filter-btn" data-filter="Traditional" type="button"data-i18n="filterTraditional">Tenues traditionnelles</button>
+  <button class="filter-btn" data-filter="Shoes" type="button" data-i18n="filterShoes">Espadrilles</button>
+</div>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Fermer" data-i18n-attr="aria-label:closeAria">&times;</button>
+  <button class="lightbox-prev" id="lightboxPrev" type="button" aria-label="Précédent" data-i18n-attr="aria-label:prevAria">&#8249;</button>
+  <img class="lightbox-image" id="lightboxImage" alt="">
+  <button class="lightbox-next" id="lightboxNext" type="button" aria-label="Suivant" data-i18n-attr="aria-label:nextAria">&#8250;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+</section>
+
+    <!-- PROMESSE -->
+    <section id="services" class="promise-section">
+      <div class="container">
+        <div class="promise-content reveal">
+          <span class="eyebrow" data-i18n="navPromise">Notre promesse</span>
+          <h2 class="promise-title" data-i18n="promiseTitle">
+            Un linge <em>irréprochable</em>, une empreinte réduite.
+          </h2>
+          <div class="promise-proofs">
+            <div class="proof" data-i18n="proof1">Lavage soigné</div>
+            <div class="proof" data-i18n="proof2">Repassage professionnel</div>
+            <div class="proof" data-i18n="proof3">Délais rapides</div>
+            <div class="proof" data-i18n="proof4">Tarifs transparents</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow" data-i18n="contactEyebrow">Parlons-en</span>
+          <h2 class="section-title" data-i18n="contactTitle">Contactez-nous</h2>
+          <p class="section-subtitle" data-i18n="contactSubtitle">
+            Notre équipe est à votre écoute pour répondre à toutes vos
+            questions.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-col reveal">
+            <div class="card info-card">
+              <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                  <h3 data-i18n="addressLabel">Adresse</h3>
+                  <p data-i18n="addressText">Bd 18 Février, Imama En face de Sonelgaz <br/> 13000 Tlemcen, Algérie</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">🕐</div>
+                <div class="info-content">
+                  <h3 data-i18n="hoursLabel">Horaires d'ouverture</h3>
+                  <p data-i18n="hoursText">
+                    Samedi – Jeudi : 09h00 – 21h00<br />
+                    <span class="opening-hours">Fermé le Vendredi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card map-card">
+              <div class="map-header">
+                <h3 data-i18n="mapLabel">Nous trouver</h3>
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  class="map-link"
+                  data-i18n="mapLink"
+                  >Agrandir le plan</a
+                >
+              </div>
+              <div class="map-container">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d623.234238070337!2d-1.3408471304721885!3d34.88690129838867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd78c99924b97053%3A0x3a5cfddd1785e9e8!2sAche%20%26%20Ferch!5e1!3m2!1sfr!2sdz!4v1785537292484!5m2!1sfr!2sdz"
+    style="border:0;"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    title="Localisation Laverie Ache & Ferch">
+  </iframe>
+</div>
+            </div>
+          </div>
+
+          <div class="contact-col reveal">
+            <div class="card quick-contact">
+              <div class="quick-contact-item">
+                <div class="icon">📞</div>
+                <div>
+                  <h4 data-i18n="phoneLabel">Téléphone</h4>
+                  <p>+213 772 15 18 39</p>
+                </div>
+              </div>
+              <div class="quick-contact-item" style="margin-left:-30px">
+                <div class="icon">✉️</div>
+                <div>
+                  <h4 data-i18n="emailLabel">Email</h4>
+                  <p>laverieacheferch@gmail.com</p>
+                </div>
+            </div>
+            <a href="tel:+213772151839" class="btn btn-primary btn-sm"
+              > <center data-i18n="callBtn">Appeler</center></a
+            >
+            
+            <a href="contact.vcf" download class="btn btn-primary btn-sm"
+              > <center data-i18n="saveBtn">Enregistrer</center></a
+            >
+            </div>
+            
+                        <div class="follow-card">
+                          <h2 data-i18n="followTitle">Suivez-nous</h2>
+                          <p data-i18n="followDesc">Offres spéciales et nouveautés, en avant-première.</p>
+                          <div class="social-icons">
+                            <a
+                              href="https://www.facebook.com/share/191bLKsewy/"
+                              class="social-icon"
+                              title="Facebook"
+                              aria-label="Facebook"
+                            >
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                  d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z"
+                                />
+                              </svg>
+                            </a>
+                            <a
+                              href="https://www.instagram.com/laverie_ache_ferch.13/"
+                              class="social-icon"
+                              title="Instagram"
+                              aria-label="Instagram"
+                            >
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                  d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53c.64-.25 1.37-.42 2.43-.47C8.94.01 9.28 0 12 0Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.25A3.25 3.25 0 1 1 12 8.75a3.25 3.25 0 0 1 0 6.5ZM17.6 6.4a1.17 1.17 0 1 0 0-2.34 1.17 1.17 0 0 0 0 2.34Z"
+                                />
+                              </svg>
+                            </a>
+                            <a
+                              href="https://www.tiktok.com/@achferch13"
+                              class="social-icon"
+                              title="TikTok"
+                              aria-label="TikTok"
+                            >
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                  d="M16.6 5.82a4.28 4.28 0 0 1-2.6-3.4h-3.06v13.24a2.6 2.6 0 1 1-1.83-2.48v-3.1a5.6 5.6 0 1 0 4.9 5.56V9.68a7.3 7.3 0 0 0 4.26 1.36V8a4.29 4.29 0 0 1-1.67-.34c-.03-.62-.02-1.24 0-1.84Z"
+                                />
+                              </svg>
+                            </a>
+                          </div>
+                          <div class="social-handle">@LaverieAcheFerch</div>
+                        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p data-i18n="footerText">&copy; 2026 Laverie Ach & Ferch. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+      /* ============================================
+         i18n — Traduction Français / Arabe
+      ============================================ */
+      const translations = {
+        fr: {
+          brandTagline: "Laverie professionnelle",
+          navPromise: "Notre promesse",
+          navContact: "Contact",
+          navContactBtn: "Nous contacter",
+          heroEyebrow: "Laverie professionnelle ·",
+          heroTitle: 'Un linge impeccable, <em>un cycle plus propre</em>',
+          heroSubtitle: "Ach & Ferch prend soin du linge des particuliers et des professionnels avec un nettoyage de haute qualité, un service fiable, rapide et une attention portée à chaque détail.",
+          heroBtn1: "Découvrir nos services",
+          drumAria: "Logo Ach & Ferch — faites glisser pour le faire tourner",
+          drumHint: "✦ Faites-le tourner ✦",
+          galleryTag: "Service de laverie haut de gamme",
+          galleryTitle: "Nos prestations",
+          galleryDesc: "Découvrez tous les articles que nous lavons, nettoyons et entretenons avec un soin professionnel.",
+          galleryBtn: "Explorer toute notre galerie",
+          modalTitle: "Notre galerie complète",
+          closeAria: "Fermer",
+          prevAria: "Précédent",
+          nextAria: "Suivant",
+          filterAll: "Tout",
+          filterClothes: "Vêtements",
+          filterHome: "Linge de maison",
+          filterTraditional: "Tenues traditionnelles",
+          filterShoes: "Espadrilles",
+          promiseTitle: 'Un linge <em>irréprochable</em>, une empreinte réduite.',
+          proof1: "Lavage soigné",
+          proof2: "Repassage professionnel",
+          proof3: "Délais rapides",
+          proof4: "Tarifs transparents",
+          contactEyebrow: "Parlons-en",
+          contactTitle: "Contactez-nous",
+          contactSubtitle: "Notre équipe est à votre écoute pour répondre à toutes vos questions.",
+          addressLabel: "Adresse",
+          addressText: 'Bd 18 Février, Imama En face de Sonelgaz <br/> 13000 Tlemcen, Algérie',
+          hoursLabel: "Horaires d'ouverture",
+          hoursText: 'Samedi – Jeudi : 09h00 – 21h00<br /><span class="opening-hours">Fermé le Vendredi</span>',
+          mapLabel: "Nous trouver",
+          mapLink: "Agrandir le plan",
+          phoneLabel: "Téléphone",
+          emailLabel: "Email",
+          callBtn: "Appeler",
+          saveBtn: "Enregistrer",
+          followTitle: "Suivez-nous",
+          followDesc: "Offres spéciales et nouveautés, en avant-première.",
+          footerText: "&copy; 2026 Laverie Ach & Ferch. Tous droits réservés.",
+        },
+        ar: {
+          brandTagline: "مغسلة احترافية",
+          navPromise: "التزامنا",
+          navContact: "اتصل بنا",
+          navContactBtn: "تواصل معنا",
+          heroEyebrow: "مغسلة احترافية ·",
+          heroTitle: 'غسيل مثالي...   <em> ونظافة تدوم</em>',
+          heroSubtitle: "تعتني آش وفرش بغسيل الأفراد والمحترفين بجودة تنظيف عالية، وخدمة موثوقة، واهتمام بكل التفاصيل.",
+          heroBtn1: "اكتشف خدماتنا",
+          drumAria: "شعار آش وفرش — اسحب لتدويره",
+          drumHint: "✦ أدره بيدك ✦",
+          galleryTag: "  مغسلة احترافية",
+          galleryTitle: "خدماتنا",
+          galleryDesc: "اكتشفوا جميع القطع التي نغسلها وننظفها ونعتني بها باحترافية.",
+          galleryBtn: "استكشف معرضنا بالكامل",
+          modalTitle: "معرضنا الكامل",
+          closeAria: "إغلاق",
+          prevAria: "السابق",
+          nextAria: "التالي",
+          filterAll: "الكل",
+          filterClothes: "ملابس",
+          filterHome: "بياضات المنزل",
+          filterTraditional: "ألبسة تقليدية",
+          filterShoes: "أحذية رياضية",
+          promiseTitle: 'نتائج <em>مثالية</em>، وعناية تستحقها ملابسك.',          proof1: "غسيل عناية فائقة",
+          proof2: "كي احترافي",
+          proof3: "آجال سريعة",
+          proof4: "أسعار شفافة",
+          contactEyebrow: "لنتحدث",
+          contactTitle: "اتصلوا بنا",
+          contactSubtitle: "فريقنا في خدمتكم للإجابة عن جميع استفساراتكم.",
+          addressLabel: "العنوان",
+          addressText: 'شارع 18 فيفري، إيماما، مقابل سونلغاز <br/> 13000 تلمسان، الجزائر',
+          hoursLabel: "ساعات العمل",
+          hoursText: 'السبت – الخميس: 09:00 – 21:00<br /><span class="opening-hours">مغلق يوم الجمعة</span>',
+          mapLabel: "موقعنا",
+          mapLink: "تكبير الخريطة",
+          phoneLabel: "الهاتف",
+          emailLabel: "البريد الإلكتروني",
+          callBtn: "اتصال",
+          saveBtn: "حفظ جهة الاتصال",
+          followTitle: "تابعونا",
+          followDesc: "عروض خاصة ومستجدات، بالحصرية.",
+          footerText: "&copy; 2026 مغسلة آش وفرش. جميع الحقوق محفوظة.",
+        },
+      };
+ 
+      let currentLang = "fr";
+      window.currentLang = currentLang;
+ 
+      function applyTranslations(lang) {
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[lang][key] !== undefined) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+ 
+        document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+          const [attr, key] = el.getAttribute("data-i18n-attr").split(":");
+          if (translations[lang][key] !== undefined) {
+            el.setAttribute(attr, translations[lang][key]);
+          }
+        });
+ 
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+ 
+        currentLang = lang;
+        window.currentLang = lang;
+ 
+        const toggle = document.getElementById("langToggle");
+        if (toggle) {
+          toggle.textContent = lang === "ar" ? "FR" : "عربي";
+        }
+ 
+        if (typeof window.rebuildGalleryUI === "function") {
+          window.rebuildGalleryUI();
+        }
+      }
+ 
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggle = document.getElementById("langToggle");
+        if (toggle) {
+          toggle.addEventListener("click", () => {
+            applyTranslations(currentLang === "fr" ? "ar" : "fr");
+          });
+        }
+      });
+      // Ancres douces
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // Reveal au scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -80px 0px" },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // Le petit jeu : on saisit le logo et on le fait tourner à la souris
+      // ou au doigt, avec un peu d'élan une fois relâché.
+      (function () {
+        const spinner = document.getElementById("drumSpinner");
+        if (!spinner) return;
+
+        let rotation = 0;
+        let dragging = false;
+        let startPointerAngle = 0;
+        let startRotation = 0;
+        let lastAngle = 0;
+        let lastTime = 0;
+        let velocity = 0;
+        let momentumFrame = null;
+
+        function angleAt(x, y) {
+          const rect = spinner.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          return Math.atan2(y - cy, x - cx) * (180 / Math.PI);
+        }
+
+        function applyRotation(deg) {
+          rotation = deg;
+          spinner.style.transform = `translate(-50%, -50%) rotate(${deg}deg)`;
+        }
+
+        function stopMomentum() {
+          if (momentumFrame) {
+            cancelAnimationFrame(momentumFrame);
+            momentumFrame = null;
+          }
+        }
+
+        function runMomentum() {
+          velocity *= 0.95;
+          if (Math.abs(velocity) < 0.03) {
+            momentumFrame = null;
+            return;
+          }
+          applyRotation(rotation + velocity);
+          momentumFrame = requestAnimationFrame(runMomentum);
+        }
+
+        function onDown(e) {
+          dragging = true;
+          spinner.classList.add("grabbing");
+          stopMomentum();
+          startPointerAngle = angleAt(e.clientX, e.clientY);
+          startRotation = rotation;
+          lastAngle = startPointerAngle;
+          lastTime = performance.now();
+          velocity = 0;
+        }
+
+        function onMove(e) {
+          if (!dragging) return;
+          const currentAngle = angleAt(e.clientX, e.clientY);
+          let totalDelta = currentAngle - startPointerAngle;
+
+          const now = performance.now();
+          const dt = Math.max(now - lastTime, 1);
+          let stepDelta = currentAngle - lastAngle;
+          if (stepDelta > 180) stepDelta -= 360;
+          if (stepDelta < -180) stepDelta += 360;
+          velocity = (stepDelta / dt) * 16;
+          lastAngle = currentAngle;
+          lastTime = now;
+
+          applyRotation(startRotation + totalDelta);
+        }
+
+        function onUp() {
+          if (!dragging) return;
+          dragging = false;
+          spinner.classList.remove("grabbing");
+          if (Math.abs(velocity) > 0.03) {
+            momentumFrame = requestAnimationFrame(runMomentum);
+          }
+        }
+
+        spinner.addEventListener("pointerdown", (e) => {
+          spinner.setPointerCapture(e.pointerId);
+          onDown(e);
+        });
+        spinner.addEventListener("pointermove", onMove);
+        spinner.addEventListener("pointerup", onUp);
+        spinner.addEventListener("pointercancel", onUp);
+
+        // Petit clin d'œil au clavier pour l'accessibilité
+        spinner.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") {
+            stopMomentum();
+            applyRotation(rotation + 15);
+          }
+          if (e.key === "ArrowLeft") {
+            stopMomentum();
+            applyRotation(rotation - 15);
+          }
+        });
+
+        // Une légère invitation à jouer, une fois la page installée
+        setTimeout(() => {
+          if (!dragging && rotation === 0) {
+            velocity = 5;
+            momentumFrame = requestAnimationFrame(runMomentum);
+          }
+        }, 1600);
+      })();
+      
+    </script>
+   <script src="gallery.js"></script>
+  </body>
+</html>
